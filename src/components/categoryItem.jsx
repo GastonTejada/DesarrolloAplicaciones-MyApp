@@ -1,37 +1,25 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, Pressable, View } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/colors';
-import Card from './card';
+import Card from './Card';
 
-const CategoryItem = ({category}) => {
-  
+const CategoryItem = ({ genre, selectGenre = () => {} }) => {
+
   return (
-    <Card>
-        <Text style = {styles.text}>{category}</Text>
+    <Card style={{ marginVertical: 10, marginHorizontal: 10 }}>
+      <Pressable onPress={()=>selectGenre(genre)}>
+        <Text style={styles.text}>{genre}</Text>
+      </Pressable>
     </Card>
-
   )
 }
 
 export default CategoryItem
 
-const styles = StyleSheet.create({
-    categoryContainer: {
-        backgroundColor: colors.darkgray,
-        width: 250,
-        height: 40,
-        shadowColor: "#000",
-        shadowOffset:{
-          width: 0,
-          height: 3,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
-        elevation: 6,
-    },
+const styles = StyleSheet.create({  
     text: {
-        color: colors.lightgray,
+        color: colors.platinum,
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 22
     }
 })
