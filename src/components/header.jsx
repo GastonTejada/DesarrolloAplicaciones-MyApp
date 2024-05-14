@@ -1,11 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/colors'
 
-const Header = ({title}) => {
+const Header = ({route}) => {
+
   return (
     <View style = {styles.container}>
-      <Text style = {styles.text}>{title}</Text>
+      <Image
+          source={require('../images/logo.png')}
+          style={styles.logo}
+      />
+      <Text style = {styles.text}>{route.name}</Text>  
     </View>
   )
 }
@@ -14,16 +19,24 @@ export default Header
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
     width: '100%',
     height: 65,
-    backgroundColor: colors.dark,
-    justifyContent: 'center',
+    backgroundColor: colors.dark,    
     alignItems: 'center',
-    borderBottomColor: colors.orange,
+    borderBottomColor: colors.orange2,
     borderBottomWidth: 2,
   },
-  text: {
+  logo:{
+    width: 50,
+    height: 50,
+    marginLeft: 15,
+    marginRight: 75,
+    justifyContent: 'flex-start',
+  },
+  text: {    
     color: colors.white,
-    fontSize: 30
+    fontSize: 30,
+  
   }
 })

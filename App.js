@@ -1,52 +1,32 @@
-import { StyleSheet, View } from "react-native"
-import Home from "./src/screens/Home"
+import { StyleSheet, Platform, SafeAreaView, StatusBar } from "react-native"
 import { colors } from "./src/constants/colors"
-import Header from "./src/components/Header"
-import { useState } from "react"
-import ItemListCategory from "./src/screens/ItemListCategory"
-import ItemDetail from "./src/screens/ItemDetail"
 import { useFonts } from "expo-font"
+import Navigator from "./src/navigation/Navigator"
 
 const App = () => {
   const [fontsLoaded, fontError] = useFonts({
     Josefin : require("./assets/JosefinSans-Regular.ttf"),
     Lobster : require("./assets/LobsterTwo-Regular.ttf"),
     PlayFair: require("./assets/Playfair_9pt-Regular.ttf"),
+    LoraBold: require("./assets/Lora-Bold.ttf"),
   })
 
-  const [genreSelected, setGenreSelected]     = useState("")
-  const [movieIdSelected, setMovieIdSelected] = useState("")
-  
-  return (
+  if (!fontsLoaded || fontError) {
+    return null
+  }
 
-    <View style={styles.container}>
-      <Header title={"Tienda de Peliculas"} style={styles.textContainer}/>      
-      {!genreSelected ? (
-        <Home setGenreSelected={setGenreSelected} />
-        ) : (
-        !movieIdSelected ?        
-          <ItemListCategory
-          genreSelected={genreSelected}
-          setGenreSelected ={setGenreSelected}
-          setMovieIdSelected={setMovieIdSelected}
-          />
-          :
-          <ItemDetail 
-            idSelected={movieIdSelected}
-            setMovieIdSelected={setMovieIdSelected}
-          />
-      )}
-    </View>
+  return (
+    <SafeAreaView style={styles.container}>
+        <Navigator/>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
     container: {
-      marginTop: 40,
-      flex: 1,
-      alignItems: 'center',
+      marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      flex: 1,    
       backgroundColor: colors.dark
-      ,      
     },
     textContainer: {
       color: colors.white,

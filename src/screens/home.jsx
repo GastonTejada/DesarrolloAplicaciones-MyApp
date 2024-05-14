@@ -3,20 +3,19 @@ import { FlatList, StyleSheet, View, ImageBackground } from "react-native"
 import CategoryItem from "../components/CategoryItem"
 import geners from "../data/genre.json"
 
-const Home = ({ setGenreSelected }) => {
+const Home = ({ route, navigation}) => {
 
     return (    
       <View style={styles.container}>
           <ImageBackground source={require('../images/Metallic-texture.jpg')}
            style={styles.background} >
               <View style={styles.flatListContainer}>
-
                   <FlatList          
                     keyExtractor = {(item) => item}
                     data={geners}
                     renderItem = {({item}) => (
                       <CategoryItem 
-                        selectGenre={setGenreSelected} 
+                        navigation={navigation} 
                         genre={item} 
                       />      
                     )}

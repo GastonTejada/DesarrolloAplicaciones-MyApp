@@ -4,12 +4,16 @@ import MovieItem from "../components/MovieItem"
 import Search from "../components/Search"
 import { useState, useEffect } from "react"
 
-const ItemListCategory = ({genreSelected = "", setGenreSelected = ()=> {},setMovieIdSelected = () => {}}) => {
+const ItemListCategory = ({ setGenreSelected = ()=> {},
+navigation,
+route}) => {
 
   const [keyWord, setKeyword] = useState("")
   const [moviesFiltered, setMoviesFiltered] = useState([])
   const [error, setError] = useState("")
 
+  const { genre: genreSelected} = route.params
+  
   useEffect(()=> {
     
     const moviesFilter = movies.filter(element =>
@@ -26,10 +30,10 @@ const ItemListCategory = ({genreSelected = "", setGenreSelected = ()=> {},setMov
       <ImageBackground source={require('../images/Metallic-texture.jpg')}
       style={styles.background} >
         <View style={styles.flatListContainer}>
-          <Search error = {error} onSearch={setKeyword} goBack={()=> setGenreSelected("")}/>
+          <Search error = {error} onSearch={setKeyword} goBack={()=> navigation.goBack()}/>
           <FlatList
             data = {moviesFiltered}
-            renderItem = {({item})=> <MovieItem movie={item} setMovieIdSelected= {setMovieIdSelected}/>}
+            renderItem = {({item})=> <MovieItem movie={item} navigation={navigation}/>}
             keyExtractor = {(producto) => producto.id}            
           />
         </View>

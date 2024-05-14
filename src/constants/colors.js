@@ -17,6 +17,7 @@ export const colors = {
     white      : '#FFF7FC',
     lightyellow: '#FEFDED',
     orange     : '#f0311e',
+    orange2    : '#FC4100',
     transparent: 'rgba(255,255,255,0.1)',
     platinum   : '#E0E1DD'
 }

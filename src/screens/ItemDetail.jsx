@@ -1,13 +1,16 @@
-import { Button, Image, StyleSheet, Text, View, ImageBackground} from "react-native"
+import { Button, Image, StyleSheet, Text, View, ImageBackground, Pressable} from "react-native"
 import React, { useEffect, useState } from "react"
 import MoviesJson from "../data/movies.json"
 import { colors } from '../constants/colors'
+import { Entypo } from '@expo/vector-icons';
+import Counter from "../components/Counter"
 
-const ItemDetail = ({ idSelected, setMovietSelected }) => {
+const ItemDetail = ({ route, navigation }) => {
 
   const [movie, setMovie] = useState(null)
-  const [orientation, setOrientation] = useState("portrait")
-  
+
+  const {movieId: idSelected} = route.params
+    
   useEffect(() => {
     const movieSelected = MoviesJson.find(
       (movie) => movie.id === idSelected
@@ -16,16 +19,14 @@ const ItemDetail = ({ idSelected, setMovietSelected }) => {
   }, [idSelected])
 
   return (
-    <View>
-      {/* <Button onPress={() => setMovietSelected("")} title="Go back" /> */}
-      <Pressable title="Go back" onPress={() => setMovietSelected("")}>        
-        <MaterialCommunityIcons name="eraser-variant" size={26} color="white" />
-      </Pressable>
-      {movie ? (
-        <View style={ styles.containerPrincipal} >    
-            <ImageBackground source={require('../images/Metallic-texture.jpg')}
-            style={styles.background} >
-                <View style={ styles.container} >    
+    <View style={ styles.containerPrincipal}>      
+        {movie ? (
+            <ImageBackground source={require('../images/Metallic-texture.jpg')} style={styles.background} >
+                <View style={ styles.container} >                        
+                    <Pressable title="Go back" style={ styles.goBack} onPress={() => navigation.goBack()}>                      
+                      <Entypo name="back" size={36} color="white" />
+                      <Text style={styles.goBackText}>Go Back</Text>
+                    </Pressable>
                     <View style={ styles.containerImage} >    
                         <Image
                           source={{ uri: movie.image }}
@@ -39,43 +40,62 @@ const ItemDetail = ({ idSelected, setMovietSelected }) => {
                       <Text></Text>
                       <Text style={styles.text}>Directors : {movie.director}</Text>
                       <Text></Text>
-                      <Text style={styles.text}>Writers : {movie.writers}</Text>
-                      <Text></Text>
                       <Text style={styles.price}>Price : $ {movie.price}</Text>                      
                     </View>
-                    <Button title="Add cart"></Button>
+                    {/* <Counter style={styles.counter}></Counter> */}
+                    {/* <View style={styles.textContainer}>
+                      <Button title="Add cart"></Button>
+                    </View>   */}
                 </View>
-              </ImageBackground>
-          </View>
+              </ImageBackground>          
       ) : null}
-    </View>
+  </View>
   )
 }
 
 export default ItemDetail
 
+
+
 const styles = StyleSheet.create({
   containerPrincipal: {
     flex: 1,
     width: '100%',
-    height: '100%'
   },
-  container: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    padding: 10
+  goBack: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: '100%',
+    paddingVertical: 10,
+    paddingHorizontal: 20,    
+    backgroundColor: colors.dark,
+    borderRadius: 5,
+    marginBottom: 10,    
+  },  
+  goBackText: {
+    color: colors.white,
+    fontSize: 25,
+    marginRight: 10,    
+    marginLeft: 80
+  },
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: "cover", 
+    justifyContent: 'center'
   },
   containerImage: {
     backgroundColor: colors.dark,
-    width: '100%',
+    width: '95%',
     height: 280,
     borderWidth: 2,
     borderBottomColor: colors.platinum,
     borderEndColor: colors.platinum,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15
+    borderRadius: 15,    
+    marginLeft: 10
   },
   image: {
     width: '90%',
@@ -89,16 +109,18 @@ const styles = StyleSheet.create({
     color: colors.lightgray,  
     fontSize: 28,
     textDecorationLine: 'underline',
-    fontFamily: 'Lobster'
+    fontFamily: 'LoraBold',
+    marginLeft: 10,
   },
   text: {    
     color: colors.lightgray,  
-    fontSize: 15,
-    fontFamily: 'Josefin'
+    fontSize: 18,
+    fontFamily: 'Josefin',
+    marginHorizontal: 10
   },  
   price: {
     justifyContent: "center",
-    textAlign: 'right',
+    textAlign: 'center',
     width: '100%',
     color: colors.lightgray,
     fontSize: 30,

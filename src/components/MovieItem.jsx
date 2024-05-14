@@ -6,12 +6,13 @@ import { colors } from '../constants/colors'
 const MovieItem = ({
   movie,
   setMovieSelected = () => {},
-  setMovieIdSelected = () => {},
+  navigation,
 }) => {
   return (
 
       <Card style={styles.cardContainer}>   
-          <Pressable style={styles.pressable} onPress ={()=> setMovieIdSelected(movie.id)}>
+          <Pressable style={styles.pressable} 
+          onPress={() => navigation.navigate('ItemDetail', {movieId: movie.id})}>
               <Image 
                   resizeMode='cover'
                   style = {styles.image}
