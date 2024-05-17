@@ -64,7 +64,7 @@ const BottomTabNavigator = () => {
                     },
                 }}
             />
-            <Tab.Screen 
+            {/* <Tab.Screen 
                 name="My profile"
                 component={MyProfileStackNavigator}
                 options={{
@@ -77,7 +77,7 @@ const BottomTabNavigator = () => {
                         )
                     },
                 }}
-            />        
+            />         */}
         </Tab.Navigator>
     )
 }

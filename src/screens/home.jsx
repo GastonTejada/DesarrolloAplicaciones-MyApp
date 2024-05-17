@@ -1,31 +1,31 @@
 import React from "react";
 import { FlatList, StyleSheet, View, ImageBackground } from "react-native"
 import CategoryItem from "../components/CategoryItem"
-import geners from "../data/genre.json"
+import { useGetGenresQuery } from "../services/shopService"
 
 const Home = ({ route, navigation}) => {
 
-    return (    
+    const {data: genres , error, isLoading} = useGetGenresQuery()
+
+    return (
       <View style={styles.container}>
           <ImageBackground source={require('../images/Metallic-texture.jpg')}
            style={styles.background} >
               <View style={styles.flatListContainer}>
-                  <FlatList          
+                  <FlatList
                     keyExtractor = {(item) => item}
-                    data={geners}
+                    data={genres}
                     renderItem = {({item}) => (
-                      <CategoryItem 
-                        navigation={navigation} 
-                        genre={item} 
-                      />      
+                      <CategoryItem
+                        navigation={navigation}
+                        genre={item}
+                      />
                     )}
                   />
 
               </View>
           </ImageBackground>
-      </View>          
-  
-      
+      </View>
   )
 }
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%'
   },
-  background: {    
+  background: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',

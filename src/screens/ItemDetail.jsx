@@ -1,66 +1,61 @@
-import { Button, Image, StyleSheet, Text, View, ImageBackground, Pressable} from "react-native"
+import { Image, StyleSheet, Text, View, ImageBackground, Pressable} from "react-native"
 import React, { useEffect, useState } from "react"
-import MoviesJson from "../data/movies.json"
 import { colors } from '../constants/colors'
 import { Entypo } from '@expo/vector-icons';
 import Counter from "../components/Counter"
+import { useGetMoviesByIdQuery } from "../services/shopService"
+import Loader from "../components/Loader"
 
 const ItemDetail = ({ route, navigation }) => {
 
-  const [movie, setMovie] = useState(null)
-
   const {movieId: idSelected} = route.params
-    
-  useEffect(() => {
-    const movieSelected = MoviesJson.find(
-      (movie) => movie.id === idSelected
-    )
-    setMovie(movieSelected)
-  }, [idSelected])
+
+  const {data: movie, error, isLoading} = useGetMoviesByIdQuery(idSelected)
 
   return (
-    <View style={ styles.containerPrincipal}>      
-        {movie ? (
-            <ImageBackground source={require('../images/Metallic-texture.jpg')} style={styles.background} >
-                <View style={ styles.container} >                        
-                    <Pressable title="Go back" style={ styles.goBack} onPress={() => navigation.goBack()}>                      
-                      <Entypo name="back" size={36} color="white" />
-                      <Text style={styles.goBackText}>Go Back</Text>
-                    </Pressable>
-                    <View style={ styles.containerImage} >    
-                        <Image
-                          source={{ uri: movie.image }}
-                          style={styles.image}                          
-                          resizeMode="contain"
-                        />    
-                    </View>    
-                    <View style={styles.textContainer}>
-                      <Text style={styles.textTitle}>{movie.title}</Text>
-                      <Text style={styles.text}>{movie.description}</Text>
-                      <Text></Text>
-                      <Text style={styles.text}>Directors : {movie.director}</Text>
-                      <Text></Text>
-                      <Text style={styles.price}>Price : $ {movie.price}</Text>                      
-                    </View>
-                    {/* <Counter style={styles.counter}></Counter> */}
-                    {/* <View style={styles.textContainer}>
-                      <Button title="Add cart"></Button>
-                    </View>   */}
-                </View>
-              </ImageBackground>          
-      ) : null}
+
+    <View style={ styles.containerPrincipal}>
+          {movie ? (
+              <ImageBackground source={require('../images/Metallic-texture.jpg')} style={styles.background} >
+                  <Pressable title="Go back" style={ styles.goBack} onPress={() => navigation.goBack()}>                      
+                        <Entypo name="back" size={36} color="white" />
+                        <Text style={styles.goBackText}>Go Back</Text>
+                  </Pressable>
+                  <View style={ styles.container} >
+                      <View style={ styles.containerImage} >    
+                          <Image
+                            source={{ uri: movie.image }}
+                            style={styles.image}                          
+                            resizeMode="contain"
+                          />    
+                      </View>    
+                      <View style={styles.textContainer}>
+                        <Text style={styles.textTitle}>{movie.title}</Text>
+                        <Text style={styles.text}>Ranking: {movie.id}    Rating: {movie.rating}    Year: {movie.year}</Text>
+                        <Text style={styles.text}>Trailer: {movie.trailer}</Text>
+                        <Text></Text>
+                        <Text style={styles.price}>Price : $ {movie.price}</Text>                      
+                      </View>
+                  </View>
+                  <Counter style={styles.counter} movie={movie} />                                 
+                </ImageBackground>          
+            ) : <Loader />}             
   </View>
   )
 }
 
 export default ItemDetail
-
-
-
 const styles = StyleSheet.create({
   containerPrincipal: {
     flex: 1,
     width: '100%',
+  },
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: "cover", 
+    justifyContent: 'center'
   },
   goBack: {
     flexDirection: "row",
@@ -78,12 +73,8 @@ const styles = StyleSheet.create({
     marginRight: 10,    
     marginLeft: 80
   },
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    resizeMode: "cover", 
-    justifyContent: 'center'
+  container: {    
+    height: '80%',
   },
   containerImage: {
     backgroundColor: colors.dark,
@@ -122,8 +113,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: 'center',
     width: '100%',
-    color: colors.lightgray,
-    fontSize: 30,
-    fontFamily: 'PlayFair'
+    color: colors.gray4 ,
+    fontSize: 35,
+    fontFamily: 'PlayFair',
+    marginBottom: 5
   }
 })

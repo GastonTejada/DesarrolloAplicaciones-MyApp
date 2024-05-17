@@ -1,94 +1,84 @@
-// import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-// import React, { useState } from "react";
-// import { colors } from "../constants/colors";
-// import { useDispatch, useSelector } from "react-redux";
-// import { decrement, increment, incrementByAmount, reset } from "../features/Counter/counterSlice";
+import { Pressable, StyleSheet, Text, Button, View } from "react-native";
+import React from "react";
+import { colors } from "../constants/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "../features/Counter/counterSlice";
+import { addCartItem } from "../features/Cart/cartSlice"
 
-// const Counter = () => {
-//     const count = useSelector(state => state.counter.value)
-//     const dispatch = useDispatch()
-//     const [inputToAdd, setInputToAdd] = useState(null);
-//     // let count = 0
-    
-//     console.log(count);
+const Counter = ({ movie }) => {
+    const count = useSelector(state => state.counter.value)
+    const dispatch = useDispatch()
 
-//     return (
-//         <View style={styles.container}>
-//             <View style={styles.buttonsContainer}>
-//                 <Pressable 
-//                     style={styles.button}
-//                     onPress={()=> dispatch(decrement())}
-//                 >
-//                     <Text style={styles.buttonText}>-</Text>
-//                 </Pressable>
-//                 <Text style={styles.span}>{count}</Text>
-//                 <Pressable 
-//                     style={styles.button}
-//                     onPress={()=> dispatch(increment())}
-//                 >
-//                     <Text style={styles.buttonText}>+</Text>
-//                 </Pressable>
-//             </View>
-//             <View style={styles.buttonsContainer}>
-//                 <TextInput
-//                     placeholder="Cantidad a aumentar"
-//                     style={styles.spanInput}
-//                     onChangeText={setInputToAdd}
-//                     value={inputToAdd}
-//                 />
-//                 <Pressable 
-//                     style={styles.button}
-//                     onPress={()=> dispatch(incrementByAmount(Number(inputToAdd)))}
-//                 >
-//                     <Text style={styles.buttonText}>Add</Text>
-//                 </Pressable>
-//             </View>
-//             <Pressable style={styles.button} onPress={()=>dispatch(reset())}>
-//                 <Text style={styles.buttonText}>Reset</Text>
-//             </Pressable>
-//         </View>
-//     );
-// };
+    const handleAddCart = () => {
+        dispatch(addCartItem({...movie, quantity: count}))
+      }
 
-// export default Counter;
+    return (
+        <View style={styles.container}>
+            <View style={styles.buttonsContainer}>
+                <Pressable
+                    style={styles.button}
+                    onPress={()=> dispatch(decrement())}
+                >
+                    <Text style={styles.buttonText}>-</Text>
+                </Pressable>
+                <Text style={styles.span}>{count}</Text>
+                <Pressable
+                    style={styles.button}
+                    onPress={()=> dispatch(increment())}
+                >
+                    <Text style={styles.buttonText}>+</Text>
+                </Pressable>
+                <View style={styles.buttonCart}>
+                      <Button title="Add cart" onPress={handleAddCart}></Button>
+                </View>
+            </View>
+        </View>
+    );
+};
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flexDirection: "column",
-//         justifyContent: "center",
-//         alignItems: "center",
-//         width: "100%",
-//         backgroundColor: colors.teal200,
-//         padding: 10,
-//     },
-//     buttonsContainer: {
-//         flexDirection: "row",
-//         justifyContent: "center",
-//         alignItems: "center",
-//         marginBottom: 10,
-//     },
-//     button: {
-//         padding: 10,
-//         backgroundColor: colors.platinum,
-//     },
-//     span: {
-//         backgroundColor: colors.teal900,
-//         width: "60%",
-//         padding: 10,
-//         textAlign: "center",
-//         fontSize: 20,
-//         color: colors.platinum
-//     },
-//     spanInput: {
-//         backgroundColor: colors.teal900,
-//         width: "60%",
-//         padding: 10,
-//         textAlign: "center",
-//         fontSize: 16,
-//         color: colors.platinum
-//     },
-//     buttonText: {
-//         fontSize: 18,
-//         fontFamily: "Josefin",
-//     },
-// });
+export default Counter;
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        backgroundColor: colors.transparent,
+        padding: 10,
+    },
+    buttonsContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 10,
+    },
+    button: {
+        padding: 10,
+        backgroundColor: colors.red,
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 50,
+        width: "10%",
+        height: "80%",        
+    },
+    span: {
+        backgroundColor: colors.white,
+        width: "10%",
+        padding: 10,
+        textAlign: "center",
+        fontSize: 18,
+        color: colors.black,
+    },
+    buttonText: {
+        fontSize: 22,        
+        color: colors.white, 
+        justifyContent: 'center',
+        marginTop: -9,
+        marginLeft: 4
+    },
+    buttonCart:{
+        width: "50%",
+    },
+});

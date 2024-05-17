@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, Text } from 'react-native'
+import { StyleSheet, View, Image, Text, ActivityIndicator } from 'react-native'
 import React, { useState , useEffect} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import BottomTabNavigator from './BottomTabNavigator'
@@ -12,6 +12,14 @@ const SplashScreen = () => (
       />
       <Text style={styles.nameShop}>PopCorn Time</Text>      
       <Text style={styles.subtitle}>Movie's  Shop</Text>
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#FF0000" />
+        <Text style={styles.textLoader}>Loading...</Text>
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>© 2024 PopCorn Time. Todos los derechos reservados.</Text>
+        <Text style={styles.footerText}>Gaston Tejada - Entrega Final Desarrollo Aplicaciones.</Text>
+      </View>    
   </View>
 );
 
@@ -22,13 +30,13 @@ const Navigator = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 4000);
   }, []);
 
 
   return (
     <NavigationContainer>
-        {loading ? <SplashScreen /> : <BottomTabNavigator />}
+        {loading ? <SplashScreen /> : <BottomTabNavigator />} 
     </NavigationContainer>
   )
 }
@@ -50,10 +58,27 @@ const styles = StyleSheet.create({
   nameShop: {    
     color: colors.white,
     fontSize: 40,
-    marginBottom:30
+    marginBottom:30,
   },
   subtitle:{
     color: colors.white,
     fontSize: 20,
-  }
+  },
+  loaderContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 30,
+  },
+  textLoader:{
+    color: colors.white,
+    fontSize: 16,
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 20,
+  },
+  footerText: {
+    color: colors.white,    
+    fontSize: 14,
+  },
 });

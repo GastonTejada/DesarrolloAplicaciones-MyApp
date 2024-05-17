@@ -1,17 +1,13 @@
 import { FlatList, Pressable, StyleSheet, Text, View, ImageBackground } from 'react-native'
 import React from 'react'
-import CartData from '../data/cart.json'
 import CartItem from '../components/CartItem';
 import { colors } from '../constants/colors'
+import { useSelector } from "react-redux"
 
 const Cart = () => {
 
-    const total = CartData.reduce((acumulador, currentItem) => acumulador += currentItem.price * currentItem.quantity, 0)
+    const {items: CartData, total} = useSelector(state => state.cart.value)
 
-    let total2 = 0
-    for (const currentItem of CartData) {
-        total2 += currentItem.price * currentItem.quantity
-    }
 
     return (
     <View style={styles.container}>
@@ -46,8 +42,7 @@ export default Cart
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'space-between',
-        flex: 1,
-        // marginBottom: 20,
+        flex: 1,        
     },
     background: {
         flex: 1,
@@ -56,8 +51,7 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         justifyContent: 'center'
       },
-    totalContainer: {
-        // flexDirection: 'row',
+    totalContainer: {        
         justifyContent: 'center',
         alignItems: 'center',        
         backgroundColor: colors.dark,
@@ -87,6 +81,5 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: 'Josefin',
         marginBottom: 10        
-
     }
 })

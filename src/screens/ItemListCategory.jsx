@@ -1,8 +1,9 @@
 import { FlatList, StyleSheet, View, ImageBackground } from "react-native"
-import movies from "../data/movies.json"
 import MovieItem from "../components/MovieItem"
 import Search from "../components/Search"
 import { useState, useEffect } from "react"
+import { useGetMoviesByCategoryQuery } from "../services/shopService"
+import Loader from "../components/Loader"
 
 const ItemListCategory = ({ setGenreSelected = ()=> {},
 navigation,
@@ -13,31 +14,38 @@ route}) => {
   const [error, setError] = useState("")
 
   const { genre: genreSelected} = route.params
+
+  const {data: moviesFetched, error: errorFromFetch, isLoading} = useGetMoviesByCategoryQuery(genreSelected)
   
   useEffect(()=> {
-    
-    const moviesFilter = movies.filter(element =>
-       element.title.toLowerCase().includes(keyWord.toLowerCase()) &&
-       element.genre.includes(genreSelected)
-      );
-    
+        
+    if (!isLoading) {
+      const moviesFilter = moviesFetched.filter(element =>
+        element.title.toLowerCase().includes(keyWord.toLowerCase()) &&
+        element.genre.includes(genreSelected)
+      )
     setMoviesFiltered(moviesFilter)
     setError("")
-  }, [keyWord, genreSelected])
+    }  
+  }, [keyWord, genreSelected, moviesFetched, isLoading])
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('../images/Metallic-texture.jpg')}
-      style={styles.background} >
-        <View style={styles.flatListContainer}>
-          <Search error = {error} onSearch={setKeyword} goBack={()=> navigation.goBack()}/>
-          <FlatList
-            data = {moviesFiltered}
-            renderItem = {({item})=> <MovieItem movie={item} navigation={navigation}/>}
-            keyExtractor = {(producto) => producto.id}            
-          />
-        </View>
-      </ImageBackground>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <ImageBackground source={require('../images/Metallic-texture.jpg')}
+        style={styles.background} >
+          <View style={styles.flatListContainer}>
+            <Search error = {error} onSearch={setKeyword} goBack={()=> navigation.goBack()}/>
+            <FlatList
+              data = {moviesFiltered}
+              renderItem = {({item})=> <MovieItem movie={item} navigation={navigation}/>}
+              keyExtractor = {(producto) => producto.id}            
+            />
+          </View>
+        </ImageBackground>
+      )}  
     </View>            
   )
 }

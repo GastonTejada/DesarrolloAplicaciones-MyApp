@@ -2,17 +2,26 @@ import { Image, StyleSheet, Text, Pressable } from 'react-native'
 import React from 'react'
 import Card from './Card'
 import { colors } from '../constants/colors'
+import { useDispatch } from 'react-redux'
+import { setIdSelected } from "../features/Shop/shopSlice"
 
 const MovieItem = ({
   movie,
   setMovieSelected = () => {},
   navigation,
 }) => {
+
+  const dispatch = useDispatch()
+  const handleNavigate = () => {
+    dispatch(setIdSelected(movie.title))
+    navigation.navigate('ItemDetail', {movieId: movie.rank})
+  }
+
   return (
 
       <Card style={styles.cardContainer}>   
           <Pressable style={styles.pressable} 
-          onPress={() => navigation.navigate('ItemDetail', {movieId: movie.id})}>
+          onPress={handleNavigate}>
               <Image 
                   resizeMode='cover'
                   style = {styles.image}
@@ -21,7 +30,6 @@ const MovieItem = ({
               <Text style={styles.textCategory}>{movie.title}</Text>
           </Pressable>
       </Card>
-
 
   )
 }
