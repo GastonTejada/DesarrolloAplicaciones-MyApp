@@ -9,8 +9,6 @@ const OrderItem = ({ order }) => {
         0
     );
 
-    console.log(order)
-
     return (
         <View style={styles.card} onPress={() => {}}>
             <View style={styles.textContainer}>

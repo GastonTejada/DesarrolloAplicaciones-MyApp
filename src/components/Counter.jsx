@@ -1,13 +1,17 @@
 import { Pressable, StyleSheet, Text, Button, View } from "react-native";
-import React from "react";
+import React, { useEffect }  from "react";
 import { colors } from "../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "../features/Counter/counterSlice";
+import { decrement, increment, reset } from "../features/Counter/counterSlice";
 import { addCartItem } from "../features/Cart/cartSlice"
 
 const Counter = ({ movie }) => {
     const count = useSelector(state => state.counter.value)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(reset());
+    }, [dispatch]);
 
     const handleAddCart = () => {
         dispatch(addCartItem({...movie, quantity: count}))
