@@ -4,12 +4,11 @@ import { colors } from "../constants/colors";
 
 const AddButton = ({
     title = "",
-    onPress = () => {},
-    color = colors.teal600,
+    onPress = () => {},    
 }) => {
     return (
         <Pressable
-            style={{ ...styles.button, backgroundColor: color }}
+            style={{ ...styles.button }}
             onPress={onPress}
         >
             <Text style={styles.text}>{title}</Text>
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     button: {
         width: "80%",
         borderWidth: 1,
-        backgroundColor: colors.teal600,
+        backgroundColor: colors.dark,
         justifyContent: "center",
         alignItems: "center",
         padding: 8
@@ -31,6 +30,6 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: "Josefin",
         fontSize: 18,
-        color: colors.teal200,
+        color: colors.white,
     },
 });

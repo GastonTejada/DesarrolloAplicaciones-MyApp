@@ -4,7 +4,7 @@ import { baseUrl } from "../databases/realtimeDatabase"
 export const shopApi = createApi({
     reducerPath: "shopApi",
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
-    tagTypes: ['profileImageGet'],
+    tagTypes: ['profileImageGet', 'locationGet'],
     endpoints: (builder) => ({
         getGenres: builder.query({
             query: () => `genre.json`,
@@ -33,20 +33,38 @@ export const shopApi = createApi({
                 body: order
             })
         }),
-        // getProfileImage: builder.query({
-        //     query: (localId) => `profileImages/${localId}.json`,
-        //     providesTags: ['profileImageGet']
-        // }),        
-        // postProfileImage: builder.mutation({
-        //     query: ({image, localId}) => ({
-        //         url: `profileImages/${localId}.json`,
-        //         method: "PUT",
-        //         body: {
-        //             image: image
-        //         },
-        //     }),
-        //     invalidatesTags: ['profileImageGet']
-        // }),
+        getProfileImage: builder.query({
+            query: (localId) => `profileImages/${localId}.json`,
+            providesTags: ['profileImageGet']
+        }),        
+        postProfileImage: builder.mutation({
+            query: ({image, localId}) => ({
+                url: `profileImages/${localId}.json`,
+                method: "PUT",
+                body: {
+                    image: image
+                },
+            }),
+            invalidatesTags: ['profileImageGet']            
+        }),
+        getLocation: builder.query({
+            query: (localId) => `locations/${localId}.json`,
+            providesTags: ['locationGet']
+        }),
+        postLocation: builder.mutation({
+            query: ({location, localId}) => ({
+                url: `locations/${localId}.json`,
+                method: "PUT",
+                body: {
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    address: location.address,
+                    updatedAt: location.updatedAt
+                },
+            }),
+            invalidatesTags: ['locationGet'] //Invalidates will trigger a refetch on profileImageGet
+        }),        
+        
     }),
 })
 
@@ -55,6 +73,8 @@ export const {
     useGetMoviesByIdQuery,
     useGetMoviesByCategoryQuery,
     usePostOrderMutation,
-    // useGetProfileImageQuery,
-    // usePostProfileImageMutation,    
+    useGetProfileImageQuery,
+    usePostProfileImageMutation,
+    useGetLocationQuery,
+    usePostLocationMutation    
 } = shopApi
