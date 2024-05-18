@@ -3,6 +3,8 @@ import React, { useState , useEffect} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import BottomTabNavigator from './BottomTabNavigator'
 import { colors } from '../constants/colors'
+import AuthStackNavigator from './AuthStackNavigator'
+import { useSelector } from 'react-redux'
 
 const SplashScreen = () => (
   <View style={styles.container}>
@@ -26,6 +28,7 @@ const SplashScreen = () => (
 const Navigator = () => {
 
   const [loading, setLoading] = useState(true);
+  const {user} = useSelector(state => state.auth.value)
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,10 +36,9 @@ const Navigator = () => {
     }, 4000);
   }, []);
 
-
   return (
     <NavigationContainer>
-        {loading ? <SplashScreen /> : <BottomTabNavigator />} 
+        {loading ? <SplashScreen /> : user ? <BottomTabNavigator/> : <AuthStackNavigator/>}
     </NavigationContainer>
   )
 }
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.dark
+    backgroundColor: colors.dark,
   },
   logo:{
     width: 150,

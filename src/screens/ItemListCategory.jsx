@@ -17,17 +17,20 @@ route}) => {
 
   const {data: moviesFetched, error: errorFromFetch, isLoading} = useGetMoviesByCategoryQuery(genreSelected)
   
-  useEffect(()=> {
-        
-    if (!isLoading) {
-      const moviesFilter = moviesFetched.filter(element =>
-        element.title.toLowerCase().includes(keyWord.toLowerCase()) &&
-        element.genre.includes(genreSelected)
-      )
-    setMoviesFiltered(moviesFilter)
-    setError("")
-    }  
-  }, [keyWord, genreSelected, moviesFetched, isLoading])
+  
+  
+
+  // useEffect(() => {
+  //   if (!isLoading && moviesFetched) {
+  //     const moviesFilter = keyWord
+  //       ? moviesFetched.filter((element) =>
+  //           element.title.toLowerCase().includes(keyWord.toLowerCase())
+  //         )
+  //       : moviesFetched;
+  //     setMoviesFiltered(moviesFilter);
+  //     setError("");
+  //   }
+  // }, [keyWord, genreSelected, moviesFetched, isLoading]);
 
   return (
     <View style={styles.container}>

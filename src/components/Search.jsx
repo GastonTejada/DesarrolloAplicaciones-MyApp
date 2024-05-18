@@ -1,33 +1,37 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native"
+import { Pressable, StyleSheet, Text, TextInput, View, FlatList } from "react-native"
 import React, { useState } from "react"
 import { colors } from "../constants/colors"
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 
 const Search = ({ onSearch = () => {}, error = "", goBack = () => {} }) => {
   const [keyword, setKeyword] = useState("")  
+
+  const handleSearch = (text) => {
+    setKeyword(text);
+    onSearch(text);
+  };
+
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => onSearch(keyword)}>
-        <MaterialIcons name="saved-search" size={26} color="white" />
-      </Pressable>
+      <Pressable onPress={goBack}>      
+        <FontAwesome name="arrow-circle-left" size={36} color="red" />
+      </Pressable>      
       <TextInput
         style={styles.input}
         placeholder="Search..."
+        placeholderTextColor={colors.white}
         value={keyword}
-        onChangeText={setKeyword}
+        onChangeText={handleSearch}      
       />      
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      
-      <Pressable onPress={() => setKeyword("")}>        
-        <MaterialCommunityIcons name="eraser-variant" size={26} color="white" />
-      </Pressable>
-      <Pressable onPress={goBack}>
-      <Ionicons name="arrow-back" size={26} color="white" />
-      </Pressable>
-      {error ? <Text>{error}</Text> : null}
+
+      {keyword.length > 0 && (
+        <Pressable onPress={() => setKeyword("")} style={styles.closeButton}>
+            <AntDesign name="closecircle" size={26} color={colors.lightgray} />
+        </Pressable>
+      )}
     </View>
   )
 }
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 18,
+    paddingBottom: 10
   },
   input: {
     width: 250,
@@ -49,4 +54,19 @@ const styles = StyleSheet.create({
     color: colors.white,
     borderRadius: 10,
   },
+  errorText: {
+    color: 'red',
+    marginTop: 5,
+  },
+  item: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.white,
+    color: colors.white,
+  },
+  closeButton: {
+    position: 'absolute',
+    right: 5,
+    top: 10,
+  }
 })
