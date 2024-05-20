@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View, ImageBackground, Pressable} from "react-
 import React, { useEffect, useState } from "react"
 import { colors } from '../constants/colors'
 import { Entypo } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import Counter from "../components/Counter"
 import { useGetMoviesByIdQuery } from "../services/shopService"
 import Loader from "../components/Loader"
@@ -17,10 +18,13 @@ const ItemDetail = ({ route, navigation }) => {
     <View style={ styles.containerPrincipal}>
           {movie ? (
               <ImageBackground source={require('../images/Metallic-texture.jpg')} style={styles.background} >
-                  <Pressable title="Go back" style={ styles.goBack} onPress={() => navigation.goBack()}>                      
+                  {/* <Pressable title="Go back" style={ styles.goBack} onPress={() => navigation.goBack()}>                      
                         <Entypo name="back" size={36} color="white" />
                         <Text style={styles.goBackText}>Go Back</Text>
-                  </Pressable>
+                  </Pressable> */}
+                  <Pressable style={ styles.goBack} onPress={() => navigation.goBack()}>      
+                    <FontAwesome name="arrow-circle-left" size={36} color="red" />
+                  </Pressable>      
                   <View style={ styles.container} >
                       <View style={ styles.containerImage} >    
                           <Image
@@ -60,10 +64,9 @@ const styles = StyleSheet.create({
   goBack: {
     flexDirection: "row",
     alignItems: "center",
-    width: '100%',
+    width: '20%',
     paddingVertical: 10,
     paddingHorizontal: 20,    
-    backgroundColor: colors.dark,
     borderRadius: 5,
     marginBottom: 10,    
   },  

@@ -4,6 +4,15 @@ import { useFonts } from "expo-font"
 import Navigator from "./src/navigation/Navigator"
 import { Provider } from "react-redux"
 import store  from "./src/store/index"
+import { initSQLiteDB } from "./src/persistence"
+
+(async ()=> {
+  try {
+      const response = await initSQLiteDB()
+  } 
+  catch (error) {
+  }
+})()
 
 const App = () => {
   const [fontsLoaded, fontError] = useFonts({

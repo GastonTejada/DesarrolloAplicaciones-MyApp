@@ -16,9 +16,7 @@ const ImageSelector = ({ navigation }) => {
     const { localId } = useSelector((state) => state.auth.value)
     const { data: imageFromBase } = useGetProfileImageQuery(localId)
 
-
     const [triggerPostImage, result] = usePostProfileImageMutation()
-
 
     const dispatch = useDispatch()
 
@@ -45,15 +43,13 @@ const ImageSelector = ({ navigation }) => {
                     quality: 0.2,
                 })
 
-                console.log(result);
-
                 if (!result.canceled){
                     const image = `data:image/jpeg;base64,${result.assets[0].base64}`
                     setImage(image)
                 }
             }
         } catch (error) {
-            console.log(error)
+            Alert.alert('Error', 'There was an error connecting to the gallery, try again later.');
         }
     }
 
@@ -81,7 +77,7 @@ const ImageSelector = ({ navigation }) => {
             }
             
         } catch (error) {
-            console.log(error);
+            Alert.alert('Error', 'There was an error connecting to the camera, try again later.');
         }
     };
     
@@ -94,7 +90,7 @@ const ImageSelector = ({ navigation }) => {
             }
             navigation.goBack()
         } catch (error) {
-            console.log(error);
+            Alert.alert('Error', 'Could not save the image, try again later.');
         }
     };
 

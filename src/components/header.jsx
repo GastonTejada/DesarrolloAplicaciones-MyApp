@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/colors'
 import { useSelector } from 'react-redux'
+import Avatar from './Avatar'
 
 const Header = ({route}) => {
 
@@ -14,6 +15,7 @@ const Header = ({route}) => {
           style={styles.logo}
       />
       <Text style = {styles.text}>{route.name}</Text>  
+      <Avatar/>
     </View>
   )
 }
@@ -29,17 +31,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomColor: colors.orange2,
     borderBottomWidth: 2,
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
   logo:{
     width: 50,
     height: 50,
-    marginLeft: 15,
-    marginRight: 75,
+    marginLeft: 15,    
     justifyContent: 'flex-start',
   },
   text: {    
     color: colors.white,
-    fontSize: 30,
-  
+    fontSize: 30,    
   }
 })

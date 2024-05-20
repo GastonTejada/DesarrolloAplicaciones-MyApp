@@ -22,11 +22,11 @@ const Cart = () => {
     const onConfirmOrder = async () => {
         try {
             await triggerPostOrder({ items: CartData, user: 'Gaston', total }).unwrap();
-            Alert.alert('Compra exitosa', 'Tu orden ha sido procesada exitosamente.');
+            Alert.alert('Successful purchase', 'Your order has been successfully processed.');
             dispatch(removeCartItem());
             setIsCartEmpty(true);
         } catch (error) {
-            Alert.alert('Error', 'Hubo un problema al procesar tu orden. Inténtalo nuevamente.');
+            Alert.alert('Error', 'There was a problem processing your order. Please try again.');
         }
     };
 

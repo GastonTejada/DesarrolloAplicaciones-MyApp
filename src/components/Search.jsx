@@ -64,9 +64,8 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.white,
     color: colors.white,
   },
-  closeButton: {
-    position: 'absolute',
-    right: 5,
-    top: 10,
+  closeButton: {    
+    right: 0,
+    top: 0,
   }
 })

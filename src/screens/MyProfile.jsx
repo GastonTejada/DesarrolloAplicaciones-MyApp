@@ -1,11 +1,15 @@
 import { Image, StyleSheet, View, ImageBackground } from "react-native";
 import React from "react";
 import AddButton from "../components/AddButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/shopService";
+import { clearUser } from "../features/User/userSlice"
+import { truncateSessionsTable } from "../persistence"
 
 const MyProfile = ({navigation}) => {
     
+    const dispatch = useDispatch()
+
     const {imageCamera, localId} = useSelector(state => state.auth.value)
     const {data: imageFromBase} = useGetProfileImageQuery(localId)
 
@@ -18,7 +22,12 @@ const MyProfile = ({navigation}) => {
     }
 
     const signOut = async () => {
-        dispatch(clearUser())
+        try {
+            const response = await truncateSessionsTable()
+            dispatch(clearUser())
+        } catch (error) {
+            Alert.alert('Error','There was a connection error with the DB, try again later');            
+        }
     }
 
     return (
