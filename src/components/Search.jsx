@@ -12,6 +12,11 @@ const Search = ({ onSearch = () => {}, error = "", goBack = () => {} }) => {
     setKeyword(text);
     onSearch(text);
   };
+  
+  const clearSearch = () => {
+    setKeyword("");
+    onSearch("");
+  };
 
   return (
     <View style={styles.container}>
@@ -28,7 +33,7 @@ const Search = ({ onSearch = () => {}, error = "", goBack = () => {} }) => {
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
       {keyword.length > 0 && (
-        <Pressable onPress={() => setKeyword("")} style={styles.closeButton}>
+        <Pressable onPress={clearSearch} style={styles.closeButton}>
             <AntDesign name="closecircle" size={26} color={colors.lightgray} />
         </Pressable>
       )}

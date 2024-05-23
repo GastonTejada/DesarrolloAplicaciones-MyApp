@@ -29,10 +29,8 @@ const LocationSelector = ({ navigation }) => {
             localId: localId
         })
     }
-
-    //Location requested on mount
+    
     useEffect(() => {
-        //IIFE Function
         (async () => {
             try {
                 let { status } = await Location.requestForegroundPermissionsAsync()
@@ -44,13 +42,13 @@ const LocationSelector = ({ navigation }) => {
                         longitude: location.coords.longitude
                     })
                 }
-            } catch (error) {
-                console.log(error);
+            } catch (error) {           
+                setError(error.message)     
             }
         })()
     }, [])
 
-    //Reverse geocoding
+
     useEffect(() => {
         (async () => {
             try {

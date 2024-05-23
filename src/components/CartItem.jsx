@@ -1,9 +1,25 @@
-import { StyleSheet, Text, View, Image} from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, Image, Pressable} from "react-native";
+import React, { useState } from "react";
 import { colors } from "../constants/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from "react-redux"
+import { removeCartItem } from '../features/Cart/cartSlice';
 
 const CartItem = ({ cartItem }) => {
+
+    const {items: CartData, total} = useSelector(state => state.cart.value)
+    const dispatch = useDispatch()
+
+    const [cartItems, setCartItems] = useState([]);
+
+    const handleDelete = (id) => {
+        try {                        
+            dispatch(removeCartItem({ id }));            
+        } catch (error) {
+            Alert.alert('Error', 'Failed to delete Item Cart');
+        }
+    };        
+    
     return (
         <View style={styles.card} onPress={() => {}}>
             <Image 
@@ -13,10 +29,12 @@ const CartItem = ({ cartItem }) => {
             /> 
             <View style={styles.textContainer}>                    
                 <Text style={styles.text}>{cartItem.title} ({cartItem.quantity})</Text>
-                <Text style={styles.text2}>{cartItem.brand}</Text>
-                <Text style={styles.text2}>${cartItem.price}</Text>
-            </View>            
-            <MaterialCommunityIcons name="delete-sweep" size={28} color={ colors.red } />
+                <Text style={styles.text2}>{cartItem.brand}</Text>                
+                <Text style={styles.text2}>Unit price: $ {cartItem.price}</Text>
+            </View>                            
+            <Pressable onPress={() => handleDelete(cartItem.id)} style={styles.trash}>
+                <MaterialCommunityIcons name="delete-sweep" size={28} color={ colors.red } />
+            </Pressable>            
         </View>            
     );
 };
@@ -50,11 +68,17 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: "Josefin",
         fontSize: 19,
-        color: colors.white,
+        color: colors.white,      
     },
     text2: {
         fontFamily: "Josefin",
-        fontSize: 14,
+        fontSize: 16,
         color: colors.white,
+    },
+    trash:{
+        justifyContent:"flex-end",
+        alignItems: "flex-end",
+        marginTop: 50,
+        width: 20,
     },
 });

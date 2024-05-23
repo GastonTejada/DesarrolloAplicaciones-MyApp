@@ -17,7 +17,10 @@ const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware()
+        getDefaultMiddleware({
+            serializableCheck: false,
+            immutableCheck: false,
+          })
             .concat(shopApi.middleware)   
             .concat(authApi.middleware)         
 })

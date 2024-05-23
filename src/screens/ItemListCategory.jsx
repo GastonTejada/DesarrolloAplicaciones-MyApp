@@ -35,13 +35,16 @@ route}) => {
         <Loader />
       ) : (
         <ImageBackground source={require('../images/Metallic-texture.jpg')}
-        style={styles.background} >
+        style={styles.background} >          
           <View style={styles.flatListContainer}>
             <Search error = {error} onSearch={setKeyword} goBack={()=> navigation.goBack()}/>
             <FlatList
               data = {moviesFiltered}
               renderItem = {({item})=> <MovieItem movie={item} navigation={navigation}/>}
-              keyExtractor = {(producto) => producto.id}            
+              // keyExtractor = {(producto) => producto.id}            
+              keyExtractor={(item) => item.id}
+              numColumns={3}
+              // contentContainerStyle={styles.flatListContent}              
             />
           </View>
         </ImageBackground>
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center'
-  },
+  },  
   flatListContainer: {
     width: '100%',    
     flex: 1,
@@ -70,4 +73,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10
   },
+  flatListContent: {
+    alignItems: 'center',
+  },
+  
 })

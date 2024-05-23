@@ -4,17 +4,40 @@ import { colors } from "../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, reset } from "../features/Counter/counterSlice";
 import { addCartItem } from "../features/Cart/cartSlice"
+import { useNavigation } from "@react-navigation/native"; 
+import Toast from 'toastify-react-native';
+// import { setUser } from '../features/User/userSlice'
+// import AuthStackNavigator from '../navigation/AuthStackNavigator'
 
 const Counter = ({ movie }) => {
-    const count = useSelector(state => state.counter.value)
+
+    
+    const count  = useSelector(state => state.counter.value)
+    const {user} = useSelector(state => state.auth.value)
     const dispatch = useDispatch()
+    const navigation = useNavigation(); 
 
     useEffect(() => {
         dispatch(reset());
     }, [dispatch]);
 
+    const showToasts = () => { 
+        Toast.success('Successfully added to cart')
+     }                   
+
     const handleAddCart = () => {
-        dispatch(addCartItem({...movie, quantity: count}))
+
+        // if (user) {
+            dispatch(addCartItem({...movie, quantity: count}));
+            showToasts()
+           
+        // } else {
+
+        //    console.log(navigation);     
+
+        //     navigation.navigate('Root', { screen: 'SignupScreen' });
+        // }
+
       }
 
     return (
@@ -34,7 +57,8 @@ const Counter = ({ movie }) => {
                     <Text style={styles.buttonText}>+</Text>
                 </Pressable>
                 <View style={styles.buttonCart}>
-                      <Button title="Add cart" onPress={handleAddCart}></Button>
+                      {/* <Button title="Add cart" onPress={handleAddCart}></Button> */}
+                      <Button title="Add cart" onPress={handleAddCart}></Button>                      
                 </View>
             </View>
         </View>

@@ -1,9 +1,11 @@
-import { Image, StyleSheet, Text, Pressable } from 'react-native'
+import { Image, StyleSheet, Text, Pressable, Dimensions, View } from 'react-native'
 import React from 'react'
 import Card from './Card'
 import { colors } from '../constants/colors'
 import { useDispatch } from 'react-redux'
 import { setIdSelected } from "../features/Shop/shopSlice"
+
+const { width: screenWidth } = Dimensions.get('window');
 
 const MovieItem = ({
   movie,
@@ -18,19 +20,20 @@ const MovieItem = ({
   }
 
   return (
-
       <Card style={styles.cardContainer}>   
           <Pressable style={styles.pressable} 
           onPress={handleNavigate}>
+              <View style={styles.ratingContainer}>
+                <Text style={styles.rating}>{movie.rating}</Text>
+              </View>
               <Image 
                   resizeMode='cover'
                   style = {styles.image}
                   source={{uri: movie.image}}
                 />                
-              <Text style={styles.textCategory}>{movie.title}</Text>
+              <Text style={styles.title}>{movie.title}</Text>
           </Pressable>
       </Card>
-
   )
 }
 
@@ -38,34 +41,55 @@ const MovieItem = ({
 export default MovieItem
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    paddingLeft: 10,
-    flexDirection: 'row',
-    height: 120,
-    width: 320,
+  cardContainer: {        
+    flexDirection: 'column',
+    height: 280,
+    width: screenWidth / 3.2,
     justifyContent: 'flex-start',
-    margin: 10,
-    borderWidth: 2,
+    alignContent: 'center',
+    borderWidth: 1,
     backgroundColor: colors.dark,
     borderBottomColor: colors.platinum,
-    borderEndColor: colors.platinum,
+    borderEndColor: colors.platinum,            
+    overflow: 'hidden',    
+    margin: 0,
+    padding: 0,
   },
-  image: {
-    height: 100,
-    width: 80,
+  image: {    
+    height: 180,
+    width: '100%',
     borderRadius: 8,
-    marginRight: 20
+    justifyContent: 'center',
+    alignContent: 'center',
   },
   textCategory: {
     color: colors.gray4,
     fontSize: 18, 
-    width: 200    
+    width: 200,    
   },
   pressable: {
     width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "flex-start",
     alignItems: "center",
-    paddingLeft: 10,
+  },
+  title: {
+    color: '#fff',
+    padding: 10,
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  ratingContainer: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: '#ff5500',
+    borderRadius: 4,
+    padding: 5,
+    zIndex: 1,
+  },
+  rating: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 })

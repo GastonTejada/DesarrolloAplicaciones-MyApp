@@ -58,6 +58,9 @@ const SignupScreen = ({ navigation }) => {
         <View style={styles.main}>
             <ImageBackground source={require('../images/Metallic-texture.jpg')}
             style={styles.background} >
+                <Pressable style={styles.closeButton} onPress={() => navigation.navigate("Home")}>
+                    <Text style={styles.closeButtonText}>×</Text>
+                </Pressable>
                 <View style={styles.container}>
                     <Text style={styles.title}>Signup</Text>
                     <InputForm label={"email"} onChange={setEmail} error={errorMail} />
@@ -99,6 +102,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         alignItems: "center",   
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 40,
+        right: 20,
+        zIndex: 1,
+    },
+    closeButtonText: {
+        fontSize: 30,
+        color: colors.white,
     },
     container: {
         width: "90%",

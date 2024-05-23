@@ -16,7 +16,7 @@ const Navigator = () => {
     useEffect(() => {
         setTimeout(() => {
           setLoading(false);
-        }, 4000);
+        }, 3500);
     }, []);
 
     useEffect(()=> {

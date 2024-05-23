@@ -4,7 +4,7 @@ import { baseUrl } from "../databases/realtimeDatabase"
 export const shopApi = createApi({
     reducerPath: "shopApi",
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
-    tagTypes: ['profileImageGet', 'locationGet'],
+    tagTypes: ['profileImageGet', 'locationGet', 'getOrders'],
     endpoints: (builder) => ({
         getGenres: builder.query({
             query: () => `genre.json`,
@@ -13,9 +13,17 @@ export const shopApi = createApi({
             query: () => `movies.json`,
             transformResponse: (response, meta, arg) => {
                 const responseTransformed = Object.values(response);
-                const filteredMovies = responseTransformed.filter(movie => movie.genre.includes(arg));
+                const filteredMovies = responseTransformed.filter(movie => movie.genre.includes(arg));                
                 return filteredMovies;
             },            
+        }),
+        getMoviesByCategoryLimit10: builder.query({
+            query: () => `movies.json`,
+            transformResponse: (response, meta, arg) => {
+                const responseTransformed = Object.values(response);     
+                const filteredMovies = responseTransformed.filter(movie => movie.genre.includes(arg));                                                           
+                return filteredMovies.slice(0, 10);
+            },
         }),
         getMoviesById: builder.query({
             query: (movieId) =>
@@ -31,7 +39,8 @@ export const shopApi = createApi({
                 url: 'orders.json',
                 method: 'POST',
                 body: order
-            })
+            }),
+            invalidatesTags: ['getOrders']
         }),
         getProfileImage: builder.query({
             query: (localId) => `profileImages/${localId}.json`,
@@ -63,8 +72,11 @@ export const shopApi = createApi({
                 },
             }),
             invalidatesTags: ['locationGet'] //Invalidates will trigger a refetch on profileImageGet
-        }),        
-        
+        }),
+        getOrders: builder.query({
+            query: () => `orders.json`,
+            providesTags: ['getOrders']
+        }),                        
     }),
 })
 
@@ -72,9 +84,11 @@ export const {
     useGetGenresQuery,
     useGetMoviesByIdQuery,
     useGetMoviesByCategoryQuery,
+    useGetMoviesByCategoryLimit10Query,
     usePostOrderMutation,
     useGetProfileImageQuery,
     usePostProfileImageMutation,
     useGetLocationQuery,
-    usePostLocationMutation    
+    usePostLocationMutation,
+    useGetOrdersQuery    
 } = shopApi

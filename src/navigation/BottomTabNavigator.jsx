@@ -29,7 +29,7 @@ const BottomTabNavigator = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View>
-                                <FontAwesome name="list" size={24} color={focused ? colors.orange : "gray" } />                                
+                                <FontAwesome name="list" size={24} color={focused ? colors.orange : "gray" } />
                                 {focused && <View style={styles.tabBarIndicator} />}
                             </View>
                         )

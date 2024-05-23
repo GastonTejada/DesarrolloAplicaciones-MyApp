@@ -1,6 +1,8 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/colors'
+
+const { width: screenWidth } = Dimensions.get('window');
 
 const Card = ({children, style}) => {
   return (
@@ -15,15 +17,13 @@ export default Card
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.dark,
-        width: 200,
-        height: 40,
-        marginRight: 10,
+        width: screenWidth,
+        height: 208,        
         marginBottom:  10,
+        marginHorizontal: 0, 
         borderWidth: 1,
-        borderBottomColor: colors.platinum,
-        borderEndColor: colors.platinum,
-        shadowOpacity: 0.5,
-        borderRadius: 8,
+        borderBottomColor: colors.platinum,        
+        shadowOpacity: 0.5,      
         justifyContent: 'center',
         alignItems: 'center',              
     }
