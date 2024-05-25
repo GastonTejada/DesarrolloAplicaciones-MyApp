@@ -21,7 +21,6 @@ const InputForm = ({
         value={input}
         onChangeText={onChangeText}
         secureTextEntry={isSecure}
-
       />
       {error ? 
         <Text style = {styles.error}>
