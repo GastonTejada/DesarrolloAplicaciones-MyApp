@@ -4,8 +4,9 @@ import { colors } from '../constants/colors'
 import { useSelector } from 'react-redux'
 import Avatar from './Avatar'
 
-const Header = ({route}) => {
 
+const Header = ({route},{title}) => {
+  
   const categorySelected = useSelector(state => state.shop.value.categorySelected)
   
   return (
@@ -13,7 +14,7 @@ const Header = ({route}) => {
       <Image
           source={require('../images/logo.png')}
           style={styles.logo}
-      />
+      />      
       <Text style = {styles.text}>{route.name}</Text>  
       <Avatar/>
     </View>

@@ -41,10 +41,8 @@ route}) => {
             <FlatList
               data = {moviesFiltered}
               renderItem = {({item})=> <MovieItem movie={item} navigation={navigation}/>}
-              // keyExtractor = {(producto) => producto.id}            
               keyExtractor={(item) => item.id}
               numColumns={3}
-              // contentContainerStyle={styles.flatListContent}              
             />
           </View>
         </ImageBackground>

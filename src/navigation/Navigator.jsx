@@ -39,8 +39,7 @@ const Navigator = () => {
 
     return (
         <NavigationContainer>
-            {/* {loading ? <SplashScreen /> : user ? <BottomTabNavigator/> : <AuthStackNavigator/>} */}
-            {loading ? <SplashScreen /> : <BottomTabNavigator/>}
+            {loading ? <SplashScreen /> : user ? <BottomTabNavigator/> : <AuthStackNavigator/>}
         </NavigationContainer>
     )
 }

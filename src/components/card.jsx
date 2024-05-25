@@ -18,9 +18,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.dark,
         width: screenWidth,
-        height: 208,        
-        marginBottom:  10,
-        marginHorizontal: 0, 
+        height: 220,        
         borderWidth: 1,
         borderBottomColor: colors.platinum,        
         shadowOpacity: 0.5,      

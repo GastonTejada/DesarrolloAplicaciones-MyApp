@@ -14,7 +14,9 @@ const AuthStackNavigator = () => {
                 headerShown: false,
             }}
         >
-            <Stack.Screen component={LoginScreen} name="Login" />
+            <Stack.Screen
+                component={LoginScreen}
+                name="Login" />
             <Stack.Screen
                 component={SignupScreen}
                 name="Signup"

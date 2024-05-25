@@ -6,7 +6,7 @@ import { useGetProfileImageQuery } from "../services/shopService";
 
 const Avatar = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const {localId} = useSelector(state => state.auth.value)
   const {data: imageFromBase} = useGetProfileImageQuery(localId)

@@ -23,16 +23,21 @@ const ItemDetail = ({ route, navigation }) => {
                   </Pressable>      
                   <View style={ styles.container} >
                       <View style={ styles.containerImage} >    
+                         <View style={styles.ratingContainer}>
+                           <Text style={styles.rating}>{movie.rating}</Text>
+                         </View>                      
                           <Image
                             source={{ uri: movie.image }}
                             style={styles.image}                          
                             resizeMode="contain"
-                          />    
+                          />
+                          <View style={styles.yearContainer}>
+                            <Text style={styles.textYear}>Year: {movie.year}</Text>    
+                          </View>
                       </View>    
                       <View style={styles.textContainer}>
                         <Text style={styles.textTitle}>{movie.title}</Text>
-                        <Text style={styles.text}>Ranking: {movie.id}    Rating: {movie.rating}    Year: {movie.year}</Text>
-                        <Text style={styles.text}>Trailer: {movie.trailer}</Text>
+                        <Text style={styles.text} numberOfLines={5} ellipsizeMode='tail'>Description: {movie.description}</Text>
                         <Text></Text>
                         <Text style={styles.price}>Price : $ {movie.price}</Text>                      
                       </View>
@@ -61,17 +66,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: '30%',
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingHorizontal: 20,    
     borderRadius: 5,
-    marginBottom: 10,    
+    marginBottom: 5,    
   },  
-  goBackText: {
-    color: colors.white,
-    fontSize: 25,
-    marginRight: 10,    
-    marginLeft: 80
-  },
   container: {    
     height: '80%',
   },
@@ -87,10 +86,36 @@ const styles = StyleSheet.create({
     borderRadius: 15,    
     marginLeft: 10
   },
+  ratingContainer: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    backgroundColor: '#ff5500',
+    borderRadius: 4,
+    padding: 5,
+    zIndex: 1,
+  },
+  rating: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
   image: {
     width: '90%',
     height: 250,
     borderRadius: 8
+  },
+  yearContainer: {
+    position: 'absolute',
+    top: 230,
+    left: 10,
+    backgroundColor: '#ff5500',
+    borderRadius: 4,
+    padding: 5,
+    zIndex: 1,
+  },
+  textYear: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
   textContainer: {
     flexDirection: "column",
@@ -106,7 +131,8 @@ const styles = StyleSheet.create({
     color: colors.lightgray,  
     fontSize: 18,
     fontFamily: 'Josefin',
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    width: '95%'
   },  
   price: {
     justifyContent: "center",

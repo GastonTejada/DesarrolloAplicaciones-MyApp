@@ -12,8 +12,7 @@ const HomeStackNavigator = () => {
         <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-                headerShown: false,
-
+                headerShown: false,                
             }}
         >
             <Stack.Screen component={Home} name="Home" />
@@ -21,10 +20,13 @@ const HomeStackNavigator = () => {
                 component={ItemListCategory}
                 name="ItemListCategory"
             />
-            <Stack.Screen component={ItemDetail} name="ItemDetail" />
+            <Stack.Screen
+                component={ItemDetail}
+                name="ItemDetail" />
         </Stack.Navigator>
     )
 }
+
 
 export default HomeStackNavigator
 

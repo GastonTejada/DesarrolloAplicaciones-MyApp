@@ -71,7 +71,7 @@ export const shopApi = createApi({
                     updatedAt: location.updatedAt
                 },
             }),
-            invalidatesTags: ['locationGet'] //Invalidates will trigger a refetch on profileImageGet
+            invalidatesTags: ['locationGet']
         }),
         getOrders: builder.query({
             query: () => `orders.json`,

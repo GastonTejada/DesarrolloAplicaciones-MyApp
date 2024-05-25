@@ -31,7 +31,7 @@ const MovieItem = ({
                   style = {styles.image}
                   source={{uri: movie.image}}
                 />                
-              <Text style={styles.title}>{movie.title}</Text>
+              <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail'>{movie.title}</Text>
           </Pressable>
       </Card>
   )
@@ -43,17 +43,15 @@ export default MovieItem
 const styles = StyleSheet.create({
   cardContainer: {        
     flexDirection: 'column',
-    height: 280,
+    height: 220,
     width: screenWidth / 3.2,
     justifyContent: 'flex-start',
     alignContent: 'center',
-    borderWidth: 1,
-    backgroundColor: colors.dark,
+    borderWidth: 0.5,
     borderBottomColor: colors.platinum,
-    borderEndColor: colors.platinum,            
+    borderEndColor: colors.platinum,                
     overflow: 'hidden',    
-    margin: 0,
-    padding: 0,
+    margin: 3,    
   },
   image: {    
     height: 180,
@@ -78,6 +76,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     textAlign: 'center',
+    width: '100%',
   },
   ratingContainer: {
     position: 'absolute',

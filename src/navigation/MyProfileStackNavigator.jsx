@@ -1,8 +1,4 @@
-import { StyleSheet } from "react-native"
 import React from "react"
-import Home from "../screens/Home"
-import ItemListCategory from "../screens/ItemListCategory"
-import ItemDetail from "../screens/ItemDetail"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import MyProfile from "../screens/MyProfile"
 import ImageSelector from "../screens/ImageSelector"
@@ -19,14 +15,12 @@ const MyProfileStackNavigator = () => {
                 headerShown: false,
             }}
         >
-            <Stack.Screen component={MyProfile} name="My Profile Stack" />
-            <Stack.Screen component={ImageSelector} name="Image selector" />
-            <Stack.Screen component={ListAddress} name="List Address"/>
+            <Stack.Screen component={MyProfile}        name="My Profile Stack" />
+            <Stack.Screen component={ImageSelector}    name="Image selector" />
+            <Stack.Screen component={ListAddress}      name="List Address"/>
             <Stack.Screen component={LocationSelector} name="Location Selector"/>            
         </Stack.Navigator>
     )
 }
 
 export default MyProfileStackNavigator
-
-const styles = StyleSheet.create({})
