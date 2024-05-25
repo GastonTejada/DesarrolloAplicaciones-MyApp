@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View, ImageBackground } from "react-native";
+import { Image, StyleSheet, View, ImageBackground, Platform } from "react-native";
 import React from "react";
 import AddButton from "../components/AddButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,8 +23,10 @@ const MyProfile = ({navigation}) => {
 
     const signOut = async () => {
         try {
-            const response = await truncateSessionsTable()
-            dispatch(clearUser())
+            if (Platform.OS !== 'web') 
+                {   await truncateSessionsTable()
+                    dispatch(clearUser())
+                }
         } catch (error) {
             Alert.alert('Error','There was a connection error with the DB, try again later');            
         }

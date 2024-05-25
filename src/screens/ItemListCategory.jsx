@@ -64,7 +64,7 @@ route}) => {
               <FlatList
                 data = {hideFirstTwo ? moviesFiltered.slice(2) : moviesFiltered}
                 renderItem = {({item})=> <MovieItem movie={item} navigation={navigation}/>}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
               />
             </View>
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
   background: {    
     flex: 1,
     resizeMode: 'cover',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '100%',
   },  
   flatListContainer: {
     width: '100%',    

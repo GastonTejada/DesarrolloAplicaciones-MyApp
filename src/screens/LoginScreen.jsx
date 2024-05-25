@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, ImageBackground } from "react-native"
+import { Pressable, StyleSheet, Text, View, ImageBackground, Platform } from "react-native"
 import React, { useState, useEffect } from "react"
 import { colors } from "../constants/colors"
 import InputForm from "../components/inputForm"
@@ -16,23 +16,26 @@ const LoginScreen = ({ navigation }) => {
 
     useEffect(() => {
         if (result?.data && result.isSuccess) {
-            insertSession({
-                email: result.data.email,
-                localId: result.data.localId,
-                token: result.data.idToken,
-            })
-                .then((response) => {
-                    dispatch(
-                        setUser({
-                            email: result.data.email,
-                            idToken: result.data.idToken,
-                            localId: result.data.localId,
-                        })
-                    )
-                })
-                .catch((err) => {
-                    Alert.alert('Error', 'An error occurred, try again later.');
-                })
+        (async ()=> {
+            try {
+                if (Platform.OS !== 'web') {
+                    const response = await insertSession({
+                        email: result.data.email,
+                        localId: result.data.localId,
+                        token: result.data.idToken,
+                    })
+                }
+                dispatch(
+                    setUser({
+                        email: result.data.email,
+                        idToken: result.data.idToken,
+                        localId: result.data.localId,
+                    })
+                )
+            } catch (error) {
+                console.log(error);
+            }
+        })()
         }
     }, [result])
     

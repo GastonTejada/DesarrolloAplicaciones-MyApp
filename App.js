@@ -9,9 +9,10 @@ import ToastManager, { Toast } from 'toastify-react-native'
 
 (async ()=> {
   try {
-      const response = await initSQLiteDB()
-  } 
-  catch (error) {
+      if (Platform.OS !== 'web') {
+          const response = await initSQLiteDB()
+      }
+  } catch (error) {
   }
 })()
 
