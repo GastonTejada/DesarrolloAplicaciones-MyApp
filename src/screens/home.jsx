@@ -4,10 +4,11 @@ import CategoryItem from "../components/CategoryItem"
 import { useGetGenresQuery } from "../services/shopService"
 import { colors } from '../constants/colors';
 
+
 const Home = ({ route, navigation}) => {
 
     const {data: genres , error, isLoading} = useGetGenresQuery()
-
+ 
     return (
       <View style={styles.container}>
           <ImageBackground source={require('../images/Metallic-texture.jpg')}
