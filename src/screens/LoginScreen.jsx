@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
                     })
                 )
             } catch (error) {
-                console.log(error);
+                Alert.alert('Error','There was a connection error with the DB, try again later');
             }
         })()
         }
