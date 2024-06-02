@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: "100%",
         backgroundColor: colors.transparent,
-        padding: 10,
+        padding: 15,
     },
     buttonsContainer: {
         flexDirection: "row",

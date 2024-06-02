@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.dark,
         shadowColor: "black",
         elevation: 4,
-        borderRadius: 15,
         height: 45,        
     },
     tabBarIndicator: {

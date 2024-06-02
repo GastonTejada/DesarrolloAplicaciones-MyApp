@@ -2,11 +2,12 @@ import { Pressable, StyleSheet, Text, View, ImageBackground, Platform } from "re
 import React, { useState, useEffect } from "react"
 import { colors } from "../constants/colors"
 import InputForm from "../components/inputForm"
-import SubmitButton from "../components/submitButton"
+import SubmitButton from "../components/SubmitButton"
 import { useSignInMutation } from "../services/authService"
 import { setUser } from "../features/User/userSlice"
 import { useDispatch } from "react-redux"
 import { insertSession } from "../persistence"
+import { FontAwesome, Feather } from '@expo/vector-icons';
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -64,7 +65,7 @@ const LoginScreen = ({ navigation }) => {
                     <Pressable onPress={() => navigation.navigate("Signup")}>
                         <Text style={styles.subLink}>Sign up</Text>
                     </Pressable>
-                </View>
+                </View>        
             </ImageBackground>
         </View>
     )

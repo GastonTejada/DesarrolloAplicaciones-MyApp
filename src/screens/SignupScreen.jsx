@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View, ImageBackground } from "react-native
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { colors } from "../constants/colors";
-import SubmitButton from "../components/submitButton";
+import SubmitButton from "../components/SubmitButton";
 import InputForm from "../components/inputForm";
 import { useSignUpMutation } from "../services/authService";
 import { setUser } from "../features/User/userSlice";
