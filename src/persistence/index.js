@@ -1,11 +1,10 @@
 import * as ExpoSQLite from "expo-sqlite"
 import { Platform } from "react-native"
 
-// const db = ExpoSQLite.openDatabase("sessions.db")
 let db = null
 if (Platform.OS !== 'web') db = ExpoSQLite.openDatabase("sessions.db")
 
-export const initSQLiteDB = () => {    
+export const initSQLiteDB = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             //Define SQL statement. BEWARE of PARENTHESIS
@@ -16,7 +15,7 @@ export const initSQLiteDB = () => {
                 (_, error) => reject(error) //Transaction error
             )
         })
-    })    
+    })
     return promise
 }
 
@@ -55,6 +54,7 @@ export const getSession = () => {
 }
 
 export const dropSessionsTable = () => {
+    console.log("Will drop table")
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             //Define SQL statement. BEWARE of PARENTHESIS

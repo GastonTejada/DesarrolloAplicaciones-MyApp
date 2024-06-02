@@ -4,7 +4,7 @@ import { useFonts } from "expo-font"
 import Navigator from "./src/navigation/Navigator"
 import { Provider } from "react-redux"
 import store  from "./src/store/index"
-import { initSQLiteDB } from "./src/persistence"
+import { dropSessionsTable, initSQLiteDB, truncateSessionsTable } from "./src/persistence"
 import ToastManager, { Toast } from 'toastify-react-native'
 
 (async ()=> {

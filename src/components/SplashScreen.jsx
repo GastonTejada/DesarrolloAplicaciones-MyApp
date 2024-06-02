@@ -1,6 +1,7 @@
-import { StyleSheet, View, Image, Text, ActivityIndicator,ImageBackground } from 'react-native'
+import { StyleSheet, View, Image, Text, ImageBackground } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/colors'
+import { ProgressBar , MD3Colors } from 'react-native-paper'
 
 
 const SplashScreen = () => (
@@ -13,8 +14,8 @@ const SplashScreen = () => (
         />
         <Text style={styles.nameShop}>PopCorn Time</Text>      
         <Text style={styles.subtitle}>Movie's  Shop</Text>
-        <View style={styles.loaderContainer}>
-          <ActivityIndicator size="large" color="#FF0000" />
+        <View style={styles.loaderContainer}>          
+          <ProgressBar progress={1} color={MD3Colors.error50}/>
           <Text style={styles.textLoader}>Loading...</Text>
         </View>
         <View style={styles.footer}>
