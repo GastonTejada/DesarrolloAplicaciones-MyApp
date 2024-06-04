@@ -1,19 +1,22 @@
-import { Pressable, StyleSheet, Text, View, ImageBackground, Platform } from "react-native"
+import { Pressable, StyleSheet, Text, View, ImageBackground, Platform, Alert } from "react-native"
 import React, { useState, useEffect } from "react"
 import { colors } from "../constants/colors"
-import InputForm from "../components/inputForm"
+import InputForm from "../components/InputForm"
 import SubmitButton from "../components/SubmitButton"
 import { useSignInMutation } from "../services/authService"
 import { setUser } from "../features/User/userSlice"
 import { useDispatch } from "react-redux"
 import { insertSession } from "../persistence"
-import { FontAwesome, Feather } from '@expo/vector-icons';
 
 const LoginScreen = ({ navigation }) => {
-    const dispatch = useDispatch()
-    const [triggerSignIn, result] = useSignInMutation()
+
     const [email, setEmail] = useState()
+    
     const [password, setPassword] = useState()
+
+    const dispatch = useDispatch()
+
+    const [triggerSignIn, result] = useSignInMutation()    
 
     useEffect(() => {
         if (result?.data && result.isSuccess) {
@@ -41,7 +44,8 @@ const LoginScreen = ({ navigation }) => {
     }, [result])
     
     const onSubmit = () => {
-        triggerSignIn({ email, password })
+        
+       triggerSignIn({ email, password })        
     }
     return (
         <View style={styles.main}>

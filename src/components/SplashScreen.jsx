@@ -1,7 +1,6 @@
-import { StyleSheet, View, Image, Text, ActivityIndicator,ImageBackground } from 'react-native'
+import { StyleSheet, View, Image, Text, ImageBackground, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/colors'
-
 
 const SplashScreen = () => (
   <ImageBackground source={require('../images/Metallic-texture.jpg')}
@@ -14,7 +13,7 @@ const SplashScreen = () => (
         <Text style={styles.nameShop}>PopCorn Time</Text>      
         <Text style={styles.subtitle}>Movie's  Shop</Text>
         <View style={styles.loaderContainer}>
-          <ActivityIndicator size="large" color="#FF0000" />
+          <ActivityIndicator size="large" color="#FF0000" />          
           <Text style={styles.textLoader}>Loading...</Text>
         </View>
         <View style={styles.footer}>
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.dark,
   },
   logo:{
-    width: 150,
+    width: 180,
     height: 150,
     justifyContent: 'center',
   },

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { colors } from "../constants/colors";
 import SubmitButton from "../components/SubmitButton";
-import InputForm from "../components/inputForm";
+import InputForm from "../components/InputForm";
 import { useSignUpMutation } from "../services/authService";
 import { setUser } from "../features/User/userSlice";
 import { signupSchema } from "../validations/authSchema";
@@ -59,7 +59,11 @@ const SignupScreen = ({ navigation }) => {
             style={styles.background} >
                 <View style={styles.container}>
                     <Text style={styles.title}>Signup</Text>
-                    <InputForm label={"email"} onChange={setEmail} error={errorMail} />
+                    <InputForm
+                        label={"email"}
+                        onChange={setEmail}
+                        error={errorMail}
+                    />
                     <InputForm
                         label={"password"}
                         onChange={setPassword}

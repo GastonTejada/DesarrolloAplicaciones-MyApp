@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import SplashScreen from '../components/SplashScreen'
 import { getSession } from '../persistence'
 import { setUser } from '../features/User/userSlice'
+import { Alert } from "react-native"
 
 const Navigator = () => {
   
@@ -32,7 +33,7 @@ const Navigator = () => {
                   }))
                 }
             } catch (error) {
-                Alert.alert('Error', 'There was a problem logging in, try again later.');
+                Alert.alert('Error', 'There was a problem logging in, try again later.');                
             }
         })()
     }, [])

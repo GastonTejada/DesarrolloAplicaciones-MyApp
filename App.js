@@ -5,7 +5,7 @@ import Navigator from "./src/navigation/Navigator"
 import { Provider } from "react-redux"
 import store  from "./src/store/index"
 import { initSQLiteDB } from "./src/persistence"
-import ToastManager, { Toast } from 'toastify-react-native'
+import ToastManager from 'toastify-react-native'
 
 (async ()=> {
   try {
@@ -28,15 +28,17 @@ const App = () => {
     return null
   }
 
-  return (    
-      <SafeAreaView style={styles.container}>
-          <StatusBar backgroundColor={colors.dark}/>
-          <ToastManager />
-          <Provider store={store}>
-              <Navigator/>
-          </Provider>        
-      </SafeAreaView>          
-  )
+  if (fontsLoaded && !fontError) {
+    return (    
+        <SafeAreaView style={styles.container}>
+            <StatusBar backgroundColor={colors.dark}/>
+            <ToastManager />
+            <Provider store={store}>
+                <Navigator/>
+            </Provider>        
+        </SafeAreaView>          
+    )
+  }
 }
 
 const styles = StyleSheet.create({

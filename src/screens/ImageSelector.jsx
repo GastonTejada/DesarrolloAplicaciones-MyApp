@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, View, StyleSheet, Text, ImageBackground } from "react-native";
+import { Image, View, StyleSheet, Text, ImageBackground, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as ExpoLibrary from "expo-media-library";
 import { useDispatch, useSelector } from "react-redux";
