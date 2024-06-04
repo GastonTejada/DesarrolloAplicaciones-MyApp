@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, ScrollView, Button, FlatList, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Modal, Button, FlatList, Image } from "react-native";
 import React, { useState } from "react";
 import { colors } from "../constants/colors";
 import { Foundation } from '@expo/vector-icons';

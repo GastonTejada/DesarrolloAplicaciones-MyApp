@@ -28,21 +28,26 @@ const App = () => {
     return null
   }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <ToastManager />
-      <Provider store={store}>
-        <Navigator/>
-      </Provider>        
-    </SafeAreaView>
+  return (    
+      <SafeAreaView style={styles.container}>
+          <StatusBar backgroundColor={colors.dark}/>
+          <ToastManager />
+          <Provider store={store}>
+              <Navigator/>
+          </Provider>        
+      </SafeAreaView>          
   )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    containerAux: {
+      flex: 0,
+      backgroundColor:colors.dark,      
+      height: Platform.OS === "android" ? StatusBar.currentHeight : 20,      
+    },
+    container: {      
       flex: 1,    
-      backgroundColor: colors.dark
+      backgroundColor: colors.dark,      
     },
     textContainer: {
       color: colors.white,

@@ -11,11 +11,11 @@ const ItemListCategory = ({ setGenreSelected = ()=> {},
 navigation,
 route}) => {
 
-  const [keyWord, setKeyword] = useState("")
+  const [keyWord, setKeyword]               = useState("")
   const [moviesFiltered, setMoviesFiltered] = useState([])
-  const [error, setError] = useState("")
-  const [showArrow, setShowArrow] = useState(false);
-  const [hideFirstTwo, setHideFirstTwo] = useState(false);
+  const [error, setError]                   = useState("")
+  const [showArrow, setShowArrow]           = useState(false);
+  const [hideFirstTwo, setHideFirstTwo]     = useState(false);
 
   const { genre: genreSelected} = route.params
 
@@ -64,7 +64,7 @@ route}) => {
               <FlatList
                 data = {hideFirstTwo ? moviesFiltered.slice(2) : moviesFiltered}
                 renderItem = {({item})=> <MovieItem movie={item} navigation={navigation}/>}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.rank}
                 numColumns={3}
               />
             </View>

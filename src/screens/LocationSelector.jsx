@@ -70,7 +70,6 @@ const LocationSelector = ({ navigation }) => {
         style={styles.background} >           
             <View style={styles.container}>
                 <Text style={styles.text}>My Address</Text>
-                {/* Flatlist con las directions */}
                 {location ? (
                     <>
                         <Text style={styles.text}>
