@@ -39,7 +39,7 @@ const App = () => {
         </SafeAreaView>          
     )
   }
-
+}
 const styles = StyleSheet.create({
     containerAux: {
       flex: 0,
@@ -55,5 +55,6 @@ const styles = StyleSheet.create({
       fontSize: 44
     }
   })
+
 
 export default App
