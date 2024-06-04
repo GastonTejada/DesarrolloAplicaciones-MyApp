@@ -39,7 +39,6 @@ const App = () => {
         </SafeAreaView>          
     )
   }
-}
 
 const styles = StyleSheet.create({
     containerAux: {
