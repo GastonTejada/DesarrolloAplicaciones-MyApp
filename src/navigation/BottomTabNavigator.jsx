@@ -6,8 +6,8 @@ import { colors } from "../constants/colors"
 import CartStack from "./CartStackNavigator"
 import OrderStack from "./OrderStackNavigator"
 import Header from "../components/Header"
-import { FontAwesome , FontAwesome5 ,Ionicons } from "@expo/vector-icons"
 import MyProfileStackNavigator from "./MyProfileStackNavigator"
+import { FontAwesome , FontAwesome5 , Ionicons } from "@expo/vector-icons"
 
 const Tab = createBottomTabNavigator()
 
@@ -57,7 +57,7 @@ const BottomTabNavigator = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View>
-                                <Ionicons name="receipt-sharp" size={24} color={ focused ? colors.orange : "gray"} />
+                                <Ionicons name="receipt-sharp" size={24} color={ focused ? colors.orange : "gray"} />                                
                                 {focused && <View style={styles.tabBarIndicator} />}
                             </View>
                         )
