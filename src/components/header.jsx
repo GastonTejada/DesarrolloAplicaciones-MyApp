@@ -32,17 +32,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomColor: colors.orange2,
     borderBottomWidth: 2,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between',    
     paddingHorizontal: 15,
   },
   logo:{
-    width: 50,
-    height: 50,
-    marginLeft: 15,    
+    width: 65,
+    height: 50,  
     justifyContent: 'flex-start',
   },
   text: {    
     color: colors.white,
-    fontSize: 30,    
+    fontSize: 28,        
   }
 })

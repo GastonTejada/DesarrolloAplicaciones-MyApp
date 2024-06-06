@@ -19,10 +19,10 @@ import ToastManager from 'toastify-react-native'
 const App = () => {
 
   const [fontsLoaded, fontError] = useFonts({
-    Josefin : require("./assets/JosefinSans-Regular.ttf"),
-    Lobster : require("./assets/LobsterTwo-Regular.ttf"),
-    PlayFair: require("./assets/Playfair_9pt-Regular.ttf"),
-    LoraBold: require("./assets/Lora-Bold.ttf"),
+    Josefin : require("./assets/Fonts/JosefinSans-Regular.ttf"),
+    Lobster : require("./assets/Fonts/LobsterTwo-Regular.ttf"),
+    PlayFair: require("./assets/Fonts/Playfair_9pt-Regular.ttf"),
+    LoraBold: require("./assets/Fonts/Lora-Bold.ttf"),
   })
 
   
