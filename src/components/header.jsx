@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import Avatar from './Avatar'
 
 
-const Header = ({route},{title}) => {
+const Header = ({route}) => {
   
   const categorySelected = useSelector(state => state.shop.value.categorySelected)
   
