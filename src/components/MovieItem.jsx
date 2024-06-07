@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
   cardContainer: {        
     flexDirection: 'column',
     height: 220,
-    width: screenWidth / 3.2,
+    width: screenWidth / 3.25,
     justifyContent: 'flex-start',
     alignContent: 'center',
     borderWidth: 0.5,
     borderBottomColor: colors.platinum,
     borderEndColor: colors.platinum,                
     overflow: 'hidden',    
-    margin: 3,    
+    margin: 2.2,
   },
   image: {    
     height: 180,

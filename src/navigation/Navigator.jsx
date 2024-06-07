@@ -40,7 +40,7 @@ const Navigator = () => {
 
     return (
         <NavigationContainer>
-            {loading ? <SplashScreen /> : user ? <BottomTabNavigator/> : <AuthStackNavigator/>}
+            {loading ? <SplashScreen /> : user ? <BottomTabNavigator/> : <AuthStackNavigator/>}            
         </NavigationContainer>
     )
 }

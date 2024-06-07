@@ -11,36 +11,16 @@ import { FontAwesome , FontAwesome5 , Ionicons } from "@expo/vector-icons"
 
 const Tab = createBottomTabNavigator()
 
-const getTitle = (route) => {
-    const routeName = route.state?.routes[route.state.index]?.name ?? route.name;
-    const titles = {
-      Shop: 'Shop',
-      Cart: 'Cart',
-      Orders: 'Orders','My profile': 'My Profile',
-      Home: 'Home',
-      Details: 'Details',      
-    };
-    return titles[routeName] || 'Default Title';
-  };
-
 const BottomTabNavigator = () => {
     return (
         <Tab.Navigator
-            // screenOptions={({ route }) => ({
-            //     header: () => {
-            //         return <Header route={route} />
-            //     },
-            //     tabBarShowLabel: false,
-            //     tabBarStyle: styles.tabBar,
-            // })}
             screenOptions={({ route }) => ({
                 header: () => {
-                  const title = getTitle(route);
-                  return <Header title={title} />; 
+                    return <Header route={route} />
                 },
                 tabBarShowLabel: false,
                 tabBarStyle: styles.tabBar,
-              })}           
+            })}
         >
             <Tab.Screen
                 name="Shop"
